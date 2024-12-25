@@ -1,0 +1,19 @@
+---
+title: DLMM PnL calculation
+---
+%%{init: {
+  "theme": "default",
+  "themeCSS": [
+    "[id^=entity-DLMMPnLv4gainsbyposition] .er.entityBox { fill: powderblue;} "
+    ]
+}}%%
+erDiagram
+    "Token Prices 1 Minute Resolution" ||--|| "DLMM PnL v4 - token prices" : ""
+    "DLMM PnL v4 - realized positions actions with prices" ||--|| "DLMM PnL v4 - realized positions actions": ""
+    "DLMM PnL v4 - token prices" ||--o{ "DLMM PnL v4 - realized positions actions with prices": ""
+    "DLMM PnL v4 - gains by position" ||--o{ "DLMM PnL v4 - realized positions actions with prices": ""
+    "DLMM PnL v4 - gains by position" ||--o{ "spl_token_call_transferChecked": ""
+    "DLMM PnL v4 - gains by position" ||--o{ "lb_clmm_call_initializePosition": ""
+    "Token Prices 1 Minute Resolution" ||--o{ "spl_token_solana.spl_token_call_transferChecked" : "determine token decimals"
+    "Token Prices 1 Minute Resolution" ||--o{ "dex_solana.trades" : "pricing"
+    "dlmm_solana.lb_clmm_call_[add,remove,claim,close]" ||--o| "DLMM PnL v4 - realized positions actions" : ""
